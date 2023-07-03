@@ -29,6 +29,7 @@ def list_products(request):
         serializer = ProductSerializers(product, many=True)
         return Response(serializer.data)
 
+
 @api_view(['GET'])
 def get_products(request, id):
     product = get_object_or_404(Product, id=id)
@@ -36,12 +37,14 @@ def get_products(request, id):
         serializer = ProductSerializers(product)
         return Response(serializer.data)
 
+
 @api_view(['GET'])
 def list_review(request):
     if request.method == 'GET':
         review = Rewiew.objects.all()
         serializer = ReviewSerializers(review, many=True)
         return Response(serializer.data)
+
 
 @api_view(['GET'])
 def get_review(request, id):

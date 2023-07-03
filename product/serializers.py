@@ -13,9 +13,8 @@ class ProductSerializers(serializers.ModelSerializer):
         model = Product
         fields = ("title", "description", "rating")
 
+
 class ReviewSerializers(serializers.ModelSerializer):
     class Meta:
         model = Rewiew
         fields = '__all__'
-
-
