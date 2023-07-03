@@ -5,13 +5,13 @@ from product.models import *
 class CategeoriesSerializers(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = ('name', 'product_count')
 
 
 class ProductSerializers(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ("title", "description", "rating")
 
 class ReviewSerializers(serializers.ModelSerializer):
     class Meta:
