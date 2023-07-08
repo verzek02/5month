@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, null=True)
+    name = models.CharField(max_length=30, null=True)
 
     @property
     def product_count(self):
@@ -36,3 +36,6 @@ class Rewiew(models.Model):
     text = models.CharField(max_length=100, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     stars = models.PositiveIntegerField(default=1, verbose_name='Звезды', null=True)
+
+class Color(models.Model):
+    name = models.ManyToManyField(Product,  blank=True)

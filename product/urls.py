@@ -3,11 +3,11 @@ from product import views
 from product.views import *
 
 urlpatterns = [
-    path('api/v1/categories/', views.categories_list),
-    path('api/v1/categories/<int:id>/', views.get_categories),
-    path('api/v1/products/', views.list_products),
-    path('api/v1/products/<int:id>/', views.get_products),
-    path('api/v1/reviews/', views.list_review),
-    path('api/v1/reviews/<int:id>/', views.get_review),
+    path('api/v1/categories/', CategoryView.as_view({'get': 'list', 'post': 'create'})),
+    path('api/v1/categories/<int:id>/',CategoryView.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'})),
+    path('api/v1/products/', Productview.as_view({'get': 'list', 'post': 'create'})),
+    path('api/v1/products/<int:id>/', Productview.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'})),
+    path('api/v1/reviews/', ReviewView.as_view({'get': 'list', 'post': 'create'})),
+    path('api/v1/reviews/<int:id>/', ReviewView.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'})),
 
 ]
