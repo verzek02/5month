@@ -1,3 +1,4 @@
+import django_filters
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -6,6 +7,9 @@ from product.serializers import *
 from product.models import *
 from rest_framework import viewsets
 from django.shortcuts import get_object_or_404
+from django_filters.rest_framework import DjangoFilterBackend
+from django_filters import rest_framework as filters
+
 
 
 
@@ -25,7 +29,26 @@ from django.shortcuts import get_object_or_404
 class CategoryView(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategeoriesModelSerializers
+    # filter_backends = [DjangoFilterBackend]
+    # filterset_fields = ['price', 'created_at']
 
+
+# class CategorisFilter(filters.FilterSet):
+#     class Meta:
+#         model = Category
+#         fields = {
+#             'timestamp': ('lte', 'gte')
+#         }
+#
+#     filter_overrides = {
+#         django_models.DateTimeField: {
+#             'filter_class': django_filters.IsoDateTimeFilter
+#         },
+#     }
+#
+# class EventsView(viewsets.ReadOnlyModelViewSet):
+#     ...
+#     filter_class = EventFilter
 
 # @api_view(['GET', 'PUT', 'DELETE'])
 # def get_categories(request, id):
@@ -46,6 +69,8 @@ class CategoryView(viewsets.ModelViewSet):
 class Productview(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductModelSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['price', 'created_at']
 
 # @api_view(['GET', 'POST'])
 # def list_products(request):
@@ -69,6 +94,7 @@ class Productview(viewsets.ModelViewSet):
 #     if request.method == 'GET':
 #         serializer = ProductModelSerializers(product)
 #         return Response(serializer.data)
+
 #     elif request.method == 'PUT':
 #         serializer = ProductModelSerializers(product, data=request.data)
 #         if serializer.is_valid():
